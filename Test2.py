@@ -1,4 +1,4 @@
-# Functions From D522 OA
+# Functions 
 
 def search_number_in_list(number, number_list):
     return number in number_list
@@ -102,56 +102,57 @@ def line_count(filename):
 print(line_count('test.txt'))
 
 # Write to CSV
-# import csv
-# import os
-#
-# def write_dict_to_csv(filename):
-#
-#     fieldnames = ['device_name', 'ip_address']
-#
-#     data = [
-#         {'device_name': 'Router1', 'ip_address': '192.168.1.1'},
-#         {'device_name': 'Router2', 'ip_address': '192.168.1.2'}
-#     ]
-#     file_is_empty = not os.path.exists(filename) or os.path.getsize(filename) == 0
-#
-#     # ADDED LINES BELOW:
-#     with open(filename, 'a', newline='') as file:
-#         csv.DictWriter(file, fieldnames=fieldnames).writeheader()
-#         csv.DictWriter(file, fieldnames=fieldnames).writerows(data)
-#
-#     print('\n'.join([','.join(fieldnames)] + [','.join(str(d[field]) for field in fieldnames) for d in data]))
-#
-# write_dict_to_csv('config.csv')
-#
-#
-# import socket
-# import time
-# import unittest.mock as mock
-#
-# def scan_ports(x):
-#     # Mock socket
-#     with mock.patch('socket.socket') as mock_socket:
-#         mock_socket.return_value.connect_ex.return_value = 0  # do not edit
-#         target_IP = '127.0.0.1'
-#         # Instantiate a socket object.
-#         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-#         # Set a timeout for the socket operations.
-#         s.settimeout(5)
-#         # Create an empty list to store port status as a list tuples.
-#         open_ports = []
-#
-#         for i in range(0, x + 1):
-#             conn = s.connect_ex((target_IP, i))
-#             if (conn == 0):
-#                 open_ports.append((i, 'OPEN'))  # Changed extend to append, and ((i, 'OPEN'))
-#             else:
-#                 open_ports.append((i, 'CLOSED'))  # Changed extend to append, and ((i, 'ClOSED'))
-#         s.close()
-#         return open_ports
-#
-# print(scan_ports(5))
-# help(socket.socket)
-# help(socket.socket.connect_ex)
-#print(dir(time))
+import csv
+import os
+
+def write_dict_to_csv(filename):
+
+    fieldnames = ['device_name', 'ip_address']
+
+    data = [
+        {'device_name': 'Router1', 'ip_address': '192.168.1.1'},
+        {'device_name': 'Router2', 'ip_address': '192.168.1.2'}
+    ]
+    file_is_empty = not os.path.exists(filename) or os.path.getsize(filename) == 0
+
+    # ADDED LINES BELOW:
+    with open(filename, 'a', newline='') as file:
+        csv.DictWriter(file, fieldnames=fieldnames).writeheader()
+        csv.DictWriter(file, fieldnames=fieldnames).writerows(data)
+
+    print('\n'.join([','.join(fieldnames)] + [','.join(str(d[field]) for field in fieldnames) for d in data]))
+
+write_dict_to_csv('config.csv')
+
+
+import socket
+import time
+import unittest.mock as mock
+
+def scan_ports(x):
+    # Mock socket
+    with mock.patch('socket.socket') as mock_socket:
+        mock_socket.return_value.connect_ex.return_value = 0  # do not edit
+        target_IP = '127.0.0.1'
+        # Instantiate a socket object.
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        # Set a timeout for the socket operations.
+        s.settimeout(5)
+        # Create an empty list to store port status as a list tuples.
+        open_ports = []
+
+        for i in range(0, x + 1):
+            conn = s.connect_ex((target_IP, i))
+            if (conn == 0):
+                open_ports.append((i, 'OPEN'))  # Changed extend to append, and ((i, 'OPEN'))
+            else:
+                open_ports.append((i, 'CLOSED'))  # Changed extend to append, and ((i, 'ClOSED'))
+        s.close()
+        return open_ports
+
+print(scan_ports(5))
+help(socket.socket)
+help(socket.socket.connect_ex)
+print(dir(time))
+
 #print(dir(socket))
